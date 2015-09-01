@@ -1,39 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Jul 12, 2015 6:18:26 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 1 Sep, 2015 11:21:08 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="pojos.User" table="USER">
-        <id name="id" type="java.lang.String">
+        <id name="id" type="int">
             <column name="ID" />
-            <generator class="guid" />
+            <generator class="increment" />
         </id>
         <property name="name" type="java.lang.String">
             <column name="NAME" />
         </property>
+        <property name="fullAddress" type="java.lang.String">
+            <column name="FULLADDRESS" />
+        </property>
         <property name="email" type="java.lang.String">
-            <column name="EMAIL" unique="true" unique-key="true"/>
+            <column name="EMAIL" />
         </property>
-        <property name="contact" type="java.lang.String">
-            <column name="CONTACT" />
+        <property name="mobileNumber" type="int">
+            <column name="MOBILENUMBER" />
         </property>
-        <property name="isMobileVerified" type="boolean" access="field">
-            <column name="ISMOBILEVERIFIED" />
-        </property>
-        <property name="isEmailVerified" type="boolean" access="field">
-            <column name="ISEMAILVERIFIED" />
-        </property>
-        <property name="isActive" type="boolean" access="field">
-            <column name="ISACTIVE" />
-        </property>
-        <property name="registerDate" type="java.sql.Timestamp">
-            <column name="REGISTERDATE" />
-        </property>
-        <property name="modifyDate" type="java.sql.Timestamp">
-            <column name="MODIFYDATE" />
-        </property>
-        <many-to-one name="address" class="pojos.Address" fetch="join" cascade="save-update">
-            <column name="ADDRESS" />
-        </many-to-one>
-    </class>
+      </class>
 </hibernate-mapping>

@@ -48,7 +48,8 @@
 		<!-- <property name="hbm2ddl.auto">create</property> -->
         <!-- This is the entity class that we'll be testing. -->
         <mapping resource="resources/User.hbm.xml"/>
-        <mapping resource="resources/Address.hbm.xml"/>
+        <mapping resource="resources/Package.hbm.xml"/>
+        <mapping resource="resources/TrackingPackage.hbm.xml"/>
 
 
     </session-factory>

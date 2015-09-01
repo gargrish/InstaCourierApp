@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1 Sep, 2015 11:37:50 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pojos.TrackingPackage" table="TRACKINGPACKAGE">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="pack" class="pojos.Package" fetch="join">
+            <column name="PACK" />
+        </many-to-one>
+        <property name="status" type="int">
+            <column name="STATUS" />
+        </property>
+        <property name="updated" type="java.util.Date">
+            <column name="UPDATED" />
+        </property>
+        <property name="comments" type="java.lang.String">
+            <column name="COMMENTS" />
+        </property>
+        <many-to-one name="deliveryUser" class="pojos.User" fetch="join">
+            <column name="DELIVERYUSER" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
