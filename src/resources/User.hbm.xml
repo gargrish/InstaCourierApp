@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 1 Sep, 2015 11:21:08 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2 Sep, 2015 12:53:11 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="pojos.User" table="USER">
         <id name="id" type="int">
@@ -17,8 +17,11 @@
         <property name="email" type="java.lang.String">
             <column name="EMAIL" />
         </property>
-        <property name="mobileNumber" type="int">
+        <property name="mobileNumber" type="long">
             <column name="MOBILENUMBER" />
         </property>
-      </class>
+        <property name="created" type="java.util.Date">
+            <column name="CREATED" />
+        </property>
+    </class>
 </hibernate-mapping>

@@ -1,14 +1,23 @@
 package pojos;
 
+import java.util.Date;
+
 public class User {
 	
 	private int id;
 	private String name;
 	private String fullAddress;
 	private String email;
-	private int mobileNumber;
+	private long mobileNumber;
 	private UserCardVO userCardVO;
+	private Date created;
 	
+	public Date getCreated() {
+		return created;
+	}
+	public void setCreated(Date created) {
+		this.created = created;
+	}
 	public int getId() {
 		return id;
 	}
@@ -33,10 +42,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getMobileNumber() {
+	public long getMobileNumber() {
 		return mobileNumber;
 	}
-	public void setMobileNumber(int mobileNumber) {
+	public void setMobileNumber(long mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 	public UserCardVO getUserCardVO() {

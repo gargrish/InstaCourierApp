@@ -1,91 +1,29 @@
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collection;
 
-import com.stripe.Stripe;
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.model.Charge;
+import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+
+
 
 
 public class DataLoaderRishabh {
 
-	public static void main(String[] args){
-	System.out.println((new Date()).getTime());
-		
-	}
-	/*	throws AuthenticationException, InvalidRequestException,
-	
-		   APIConnectionException, CardException, APIException  */
-/*			    Stripe.apiKey = "sk_test_9hEr5VIanWPiPf9waJhqLZnL"; // stripe public
-			                              // test key
-
-			    final Map<String, Object> cardParams = new HashMap<String, Object>();
-			    cardParams.put("number", "4386280523052821");
-			    cardParams.put("exp_month", 12);
-			    cardParams.put("exp_year", 2017);
-			    cardParams.put("cvc", "834");
-			    cardParams.put("name", "Rishabh Garg");
-			    cardParams.put("address_line1", "807 CA Appts");
-			    cardParams.put("address_line2", "Paschim Vihar");
-			    cardParams.put("address_city", "New Delhi");
-			    cardParams.put("address_zip", "110063");
-			    cardParams.put("address_state", "Delhi");
-			    cardParams.put("address_country", "India");
-
-			    final Map<String, Object> chargeParams = new HashMap<String, Object>();
-			    chargeParams.put("amount", 50);
-			    chargeParams.put("currency", "usd");
-			    chargeParams.put("card", cardParams);
-
-			    final Charge charge = Charge.create(chargeParams);
-			    System.out.println(charge);
-			  }*/
-/*		Configuration configuration = new Configuration();
+	public static void main(String[] args) {
+		Configuration configuration = new Configuration();
 	    configuration.configure("resources/hibernate.cfg.xml");
 
 	    ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
 	            configuration.getProperties()).build();
 	    SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		Session session=sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		String hql = "from User";
-		String hql2 = "delete from PrivateChat";
-		Query qry = session.createQuery(hql);
-//		System.out.println(qry.executeUpdate());
-//		tx.commit();
-//		List<User> users = qry.list();
-		//for()
-		for(User list:users){
-			System.out.println(list.getId());
-		}
-//		System.out.println(qry.list().size());
-		session.close();
-//		Query qry2 = session.createQuery(hql2);
-
-//		List<PrivateChat> chats = qry.list();
-//		System.out.println(chats.size());
-		for(PrivateChat pv:chats){
-			System.out.println(chats.get(chats.size()-1).getCreateTime());
-//			System.out.println(pv.getId()+ " " + pv.getMsg() + " " +pv.getCreateTime());			
-		}
-		String hql = "from OTP";
-		Query qry = session.createQuery(hql);
-		List<OTP> poolRequest = qry.list();
-		for(OTP otp:poolRequest){
-		session.delete(otp);
-		}
-tx.commit();
-		for(OTP otp:poolRequest){
-			System.out.println(otp.getEmail() + " "+ otp.getPasscode());
-		}
 		
-	//session.close();
-		
-		User user= new User();
+	/*	User user= new User();
 		user.setName("Sahil Ajmani");
 		user.setCompanyName("cisco");
 		user.setContact("8861622290");
@@ -112,8 +50,9 @@ tx.commit();
 		session=sessionFactory.openSession();
 		Collection<User> result = UserUtil.getByName(session, "Sahil Ajmani");
 		System.out.println(result);
-		sessionFactory.close();
+		sessionFactory.close();*/
 		
+		/*Session session=sessionFactory.openSession();
 		String hql = "from OTP";
 		Query qry = session.createQuery(hql);
 		List<OTP> lst = qry.list();
@@ -122,9 +61,55 @@ tx.commit();
 			System.out.println("OTP : " + otp.getPasscode());
 			System.out.println("Create Time : " + otp.getCreate_time());		
 		}
-	//	sessionFactory.close();
-	   */
-}	
+		sessionFactory.close();*/
+	   
+/*		Address add1=new Address();
+		//add1.setId("1");
+		add1.setLattitude(28.70);
+		add1.setLongitude(77.16);
+		add1.setAddressLine1("ff");
+		add1.setAddressLine2("fff");
+		add1.setCity("delhi");
+		add1.setPincode("110055");
+		add1.setState("delhi");
+		Address add2=new Address();
+		//add2.setId("2");
+		add2.setLattitude(28.426852);
+		add2.setLongitude(77.031367);
+		Address add3=new Address();
+		add3.setId("3");
+		add3.setLattitude(28.673751);
+		add3.setLongitude(77.127338);
+		Address add4=new Address();
+		add4.setId("4");
+		add4.setLattitude(28.495781);
+		add4.setLongitude(77.08826);
+		User user1=new User();
+		//user1.setId("1001");
+		user1.setHomeAddress(add1);
+		user1.setOfficeAddress(add2);
+		user1.setHasCar(false);
+		user1.setDistance(41.5f);
+		User user2=new User();
+		user2.setId("1002");
+		user2.setHasCar(false);
+		user2.setHomeAddress(add3);
+		user2.setOfficeAddress(add2);
+		user2.setDistance((float) 36.9);
+		// Session session = sessionFactory.openSession();
+		//	Transaction tx = session.beginTransaction();	
+			
+			session.save(add1);
+			System.out.println("address saved successfully ! ");
+			session.save(add2);
+			session.save(add3);
+			session.save(add4);
+			//session.save(user1);
+			//session.save(user2);*/
+		
+		session.close();
 		
 		
-
+	}
+	
+}
