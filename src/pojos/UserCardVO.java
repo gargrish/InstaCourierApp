@@ -1,27 +1,41 @@
 package pojos;
 
 public class UserCardVO {
-private int cardNumber;
-private int cvv;
-private String expDate;
-public int getCardNumber() {
-	return cardNumber;
-}
-public void setCardNumber(int cardNumber) {
-	this.cardNumber = cardNumber;
-}
-public int getCvv() {
-	return cvv;
-}
-public void setCvv(int cvv) {
-	this.cvv = cvv;
-}
-public String getExpDate() {
-	return expDate;
-}
-public void setExpDate(String expDate) {
-	this.expDate = expDate;
-}
+	private long cardNumber;
+	private int cvv;
+	private int expDate;
+	private int expYear;
 
+	public long getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(long cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+
+	public int getCvv() {
+		return cvv;
+	}
+
+	public void setCvv(int cvv) {
+		this.cvv = cvv;
+	}
+
+	public int getExpDate() {
+		return expDate;
+	}
+
+	public void setExpDate(int expDate) {
+		this.expDate = expDate;
+	}
+
+	public int getExpYear() {
+		return expYear;
+	}
+
+	public void setExpYear(int expYear) {
+		this.expYear = expYear;
+	}
 
 }
