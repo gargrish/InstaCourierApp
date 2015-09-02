@@ -10,9 +10,9 @@ public class AddUser {
 		DaoImpl db=new DaoImpl();
 		User user=new User();
 		user.setEmail("vidurthakral@gmail.com");
-		user.setFullAddress("dhsfk");
+		user.setPassword("dhsfk");
 		user.setMobileNumber(965443841);
-		user.setName("vidur");
+		user.setFirstName("vidur");
 		System.out.println(db.insertUser(user));
 	}
 
