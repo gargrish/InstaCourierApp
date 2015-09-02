@@ -1,8 +1,9 @@
 package pojos;
 
+import java.io.Serializable;
 import java.util.Date;
-
-public class User {
+@SuppressWarnings("serial")
+public class User implements Serializable{
 	
 	private int id;
 	private String name;

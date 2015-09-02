@@ -17,6 +17,7 @@ public class DaoImpl implements DaoI {
 			.getSessionFactoryInstance();
 	Logger logger = Logger.getLogger("debug");
 
+	@Override
 	public boolean insertUser(User user) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();

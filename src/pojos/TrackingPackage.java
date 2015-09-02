@@ -1,8 +1,10 @@
 package pojos;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TrackingPackage {
+@SuppressWarnings("serial")
+public class TrackingPackage implements Serializable{
 
 	private String id;
 	private Package pack;

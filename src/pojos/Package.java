@@ -1,9 +1,11 @@
 package pojos;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
-public class Package {
+@SuppressWarnings("serial")
+public class Package implements Serializable{
 	
 	private int id; // unique id for each package - will help us to track.
 	private User user;
