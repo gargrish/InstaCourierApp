@@ -9,8 +9,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.stripe.Stripe;
+
 import pojos.User;
+import utility.GlobalConstants;
 import utility.InstaCourierUtil;
+import utility.StripeWebService;
 
 public class DaoImpl implements DaoI {
 	SessionFactory sessionFactory = InstaCourierUtil
@@ -21,12 +25,17 @@ public class DaoImpl implements DaoI {
 	public boolean insertUser(User user) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		
+
 		try {
 			user.setCreated(this.getCurrentTime());
 			session.save(user);
-			tx.commit();
-			
+			Stripe.apiKey = GlobalConstants.STRIPE_API_KEY;
+			if (StripeWebService.createCustomer(user)) {
+				tx.commit();
+			} else {
+				tx.rollback();
+				return false;
+			}
 		} catch (Exception e) {
 			tx.rollback();
 			return false;
@@ -35,12 +44,12 @@ public class DaoImpl implements DaoI {
 		}
 		return true;
 	}
-	
+
 	private Date getCurrentTime() throws ParseException {
 		Date date = new Date();
 		System.out.println("Date" + date);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.parse(sdf.format(date));
 	}
-	
+
 }

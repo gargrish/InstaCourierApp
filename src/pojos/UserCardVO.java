@@ -3,7 +3,7 @@ package pojos;
 public class UserCardVO {
 	private long cardNumber;
 	private int cvv;
-	private int expDate;
+	private int expMonth;
 	private int expYear;
 
 	public long getCardNumber() {
@@ -21,15 +21,12 @@ public class UserCardVO {
 	public void setCvv(int cvv) {
 		this.cvv = cvv;
 	}
-
-	public int getExpDate() {
-		return expDate;
+	public int getExpMonth() {
+		return expMonth;
 	}
-
-	public void setExpDate(int expDate) {
-		this.expDate = expDate;
+	public void setExpMonth(int expMonth) {
+		this.expMonth = expMonth;
 	}
-
 	public int getExpYear() {
 		return expYear;
 	}
