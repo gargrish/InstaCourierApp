@@ -119,7 +119,11 @@
 			<artifactId>stripe-java</artifactId>
 			<version>1.15.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.twilio.sdk</groupId>
+			<artifactId>twilio-java-sdk</artifactId>
+			<version>4.5.0</version>
+		</dependency>
 	</dependencies>
 	<profiles>
 		<profile>
