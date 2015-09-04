@@ -48,7 +48,7 @@ public class DaoImpl implements DaoI {
 	private Date getCurrentTime() throws ParseException {
 		Date date = new Date();
 		System.out.println("Date" + date);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
 		return sdf.parse(sdf.format(date));
 	}
 

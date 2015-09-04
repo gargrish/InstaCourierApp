@@ -17,11 +17,11 @@
 		<property name="password" type="java.lang.String">
 			<column name="PASSWORD" />
 		</property>
-		<property name="email" type="java.lang.String">
-			<column name="EMAIL" />
+		<property name="email" type="java.lang.String" unique="true">
+			<column name="EMAIL" unique="true"/>
 		</property>
-		<property name="mobileNumber" type="long">
-			<column name="MOBILENUMBER" />
+		<property name="mobileNumber" type="long" unique="true">
+			<column name="MOBILENUMBER" unique="true"/>
 		</property>
 		<property name="created" type="java.util.Date">
 			<column name="CREATED" />

@@ -1,6 +1,6 @@
 import java.util.Collection;
-
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,6 +8,8 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+
+import pojos.User;
 
 
 
@@ -22,6 +24,13 @@ public class DataLoaderRishabh {
 	            configuration.getProperties()).build();
 	    SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		Session session=sessionFactory.openSession();
+/*		Transaction tx = session.beginTransaction();
+		String hql = "delete from User";
+		Query query = session.createQuery(hql);
+		System.out.println(query.executeUpdate());
+		tx.commit();*/
+//		User user = (User) query.uniqueResult();
+//		System.out.println(user.getCreated());
 		
 	/*	User user= new User();
 		user.setName("Sahil Ajmani");
