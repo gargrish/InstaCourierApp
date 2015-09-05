@@ -15,6 +15,7 @@ import pojos.User;
 import utility.GlobalConstants;
 import utility.InstaCourierUtil;
 import utility.StripeWebService;
+import vo.UserResponseVO;
 
 public class DaoImpl implements DaoI {
 	SessionFactory sessionFactory = InstaCourierUtil
@@ -22,27 +23,37 @@ public class DaoImpl implements DaoI {
 	Logger logger = Logger.getLogger("debug");
 
 	@Override
-	public boolean insertUser(User user) {
+	public UserResponseVO insertUser(User user) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
+		UserResponseVO userResponseVO = new UserResponseVO();
 
 		try {
 			user.setCreated(this.getCurrentTime());
 			session.save(user);
 			Stripe.apiKey = GlobalConstants.STRIPE_API_KEY;
-			if (StripeWebService.createCustomer(user)) {
+			UserResponseVO stripeResponse = StripeWebService
+					.createCustomer(user);
+			if (stripeResponse.isResponse()) {
 				tx.commit();
+				userResponseVO.setResponse(true);
+				userResponseVO.setUser(user);
 			} else {
 				tx.rollback();
-				return false;
+				userResponseVO.setResponse(false);
+				userResponseVO
+						.setErrorMsg("Error while creating user using Stripe API : "
+								+ stripeResponse.getErrorMsg());
 			}
 		} catch (Exception e) {
+			logger.info(e.getStackTrace().toString());
 			tx.rollback();
-			return false;
+			userResponseVO.setResponse(false);
+			userResponseVO.setErrorMsg("Error while inserting user in DB");
 		} finally {
 			session.close();
 		}
-		return true;
+		return userResponseVO;
 	}
 
 	private Date getCurrentTime() throws ParseException {

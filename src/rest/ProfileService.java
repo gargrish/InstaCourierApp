@@ -25,9 +25,10 @@ public class ProfileService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public UserResponseVO insertUserProfile(User user) throws SystemException {
-		UserResponseVO userResponse = new UserResponseVO();
+		UserResponseVO userResponse = null;
 		try {
-			if (dao.insertUser(user)) {
+			userResponse = dao.insertUser(user);
+/*			if (dao.insertUser(user).isResponse()) {
 				userResponse.setResponse(true);
 				userResponse.setUser(user);
 				userResponse.setErrorMsg("User[" + user.getId()
@@ -38,12 +39,13 @@ public class ProfileService {
 				userResponse.setErrorMsg("User[" + user.getId()
 						+ "] Insert Failed");
 				logger.info("Failed to insert User[" + user.getId() + "]");
-			}
+			}*/
 		} catch (Exception e) {
 			logger.info(e.getStackTrace().toString());
+			userResponse = new UserResponseVO();
 			userResponse.setResponse(false);
 			userResponse.setErrorMsg("Failed to insert User[" + user.getId()
-					+ "] : " + e.getStackTrace().toString());
+					+ "] : " + e.getMessage());
 		}
 		return userResponse;
 	}

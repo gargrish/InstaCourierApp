@@ -2,6 +2,7 @@ package utility;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
@@ -11,40 +12,49 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.Customer;
 
 import pojos.User;
+import vo.UserResponseVO;
 
 public class StripeWebService {
-	
-	public static boolean createCustomer(User user){
-		Map<String,Object> customerParams = new HashMap<String, Object>();
-		customerParams.put("id", "stripeId"+user.getId());
+
+	public static UserResponseVO createCustomer(User user) {
+		Logger logger = Logger.getLogger("debug");
+		UserResponseVO userResponseVO = new UserResponseVO();
+		Map<String, Object> customerParams = new HashMap<String, Object>();
+		customerParams.put("id", "stripeId" + user.getId());
 		customerParams.put("email", user.getEmail());
-		Map<String,Object> source = new HashMap<String, Object>();
+		Map<String, Object> source = new HashMap<String, Object>();
 		source.put("object", "card");
-		source.put("number", user.getUserCardVO().getCardNumber()+"");
+		source.put("number", user.getUserCardVO().getCardNumber() + "");
 		source.put("exp_month", user.getUserCardVO().getExpMonth());
 		source.put("exp_year", user.getUserCardVO().getExpYear());
 		source.put("cvc", user.getUserCardVO().getCvv());
-		source.put("name", user.getFirstName()+" "+user.getLastName());
+		source.put("name", user.getFirstName() + " " + user.getLastName());
 		customerParams.put("source", source);
-		try {			
+		try {
 			Customer.create(customerParams);
+			userResponseVO.setResponse(true);
 		} catch (AuthenticationException e) {
-			e.printStackTrace();
-			return false;
+			logger.info(e.getStackTrace().toString());
+			userResponseVO.setResponse(false);
+			userResponseVO.setErrorMsg("Authentication Exception");
 		} catch (InvalidRequestException e) {
-			e.printStackTrace();
-			return false;
+			logger.info(e.getStackTrace().toString());
+			userResponseVO.setResponse(false);
+			userResponseVO.setErrorMsg("Invalid Request Exception");
 		} catch (APIConnectionException e) {
-			e.printStackTrace();
-			return false;
+			logger.info(e.getStackTrace().toString());
+			userResponseVO.setResponse(false);
+			userResponseVO.setErrorMsg("API Connection Exception");
 		} catch (CardException e) {
-			e.printStackTrace();
-			return false;
+			logger.info(e.getStackTrace().toString());
+			userResponseVO.setResponse(false);
+			userResponseVO.setErrorMsg("Card Exception");
 		} catch (APIException e) {
-			e.printStackTrace();
-			return false;
+			logger.info(e.getStackTrace().toString());
+			userResponseVO.setResponse(false);
+			userResponseVO.setErrorMsg("API Exception");
 		}
-		return true;
+		return userResponseVO;
 	}
 
 }

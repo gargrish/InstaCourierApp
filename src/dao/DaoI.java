@@ -1,9 +1,10 @@
 package dao;
 
 import pojos.User;
+import vo.UserResponseVO;
 
 public interface DaoI {
 
-	boolean insertUser(User user);
+	UserResponseVO insertUser(User user);
 
 }
