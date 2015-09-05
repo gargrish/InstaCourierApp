@@ -5,6 +5,8 @@ import vo.UserResponseVO;
 
 public interface DaoI {
 
-	UserResponseVO insertUser(User user);
+	public UserResponseVO insertUser(User user);
+	public UserResponseVO getUserDetails(User user);
+	public UserResponseVO checkUserExistence(long mobileNumber);
 
 }

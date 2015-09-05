@@ -44,22 +44,45 @@ public class ProfileService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public int sendOTPService(User user) throws SystemException {
 		if (user != null && user.getMobileNumber() > 0) {
-			int otp = 0;
-			try {
-				otp = (int) (1000 + Math.random() * 8999);
-				if (TwilioWebService
-						.sendOTPMessage(user.getMobileNumber(), otp)) {
-					logger.info("otp sent :" + otp);
-					return otp;
-				} else {
-					logger.info("Error While Sending Message");
+			UserResponseVO checkMobileExistence = dao.checkUserExistence(user
+					.getMobileNumber());
+			if (!checkMobileExistence.isResponse()) {
+				int otp = 0;
+				try {
+					otp = (int) (1000 + Math.random() * 8999);
+					if (TwilioWebService.sendOTPMessage(user.getMobileNumber(),
+							otp)) {
+						logger.info("otp sent :" + otp);
+						return otp;
+					} else {
+						logger.info("Error While Sending Message");
+						return 0;
+					}
+				} catch (Exception e) {
+					logger.info(e.getMessage());
 					return 0;
 				}
-			} catch (Exception e) {
-				logger.info(e.getMessage());
-				return 0;
 			}
 		}
 		return 0;
 	}
+
+	@POST
+	@Path("userloginservice")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public UserResponseVO userAuthentication(User user) {
+		UserResponseVO userResponse = null;
+		try {
+			userResponse = dao.getUserDetails(user);
+		} catch (Exception e) {
+			logger.info(e.getStackTrace().toString());
+			userResponse = new UserResponseVO();
+			userResponse.setResponse(false);
+			userResponse.setErrorMsg("Failed to get User Details :"
+					+ e.getMessage());
+		}
+		return userResponse;
+	}
+
 }
