@@ -28,18 +28,6 @@ public class ProfileService {
 		UserResponseVO userResponse = null;
 		try {
 			userResponse = dao.insertUser(user);
-/*			if (dao.insertUser(user).isResponse()) {
-				userResponse.setResponse(true);
-				userResponse.setUser(user);
-				userResponse.setErrorMsg("User[" + user.getId()
-						+ "] Insert Successful");
-				logger.info("User[" + user.getId() + "] Inserted");
-			} else {
-				userResponse.setResponse(false);
-				userResponse.setErrorMsg("User[" + user.getId()
-						+ "] Insert Failed");
-				logger.info("Failed to insert User[" + user.getId() + "]");
-			}*/
 		} catch (Exception e) {
 			logger.info(e.getStackTrace().toString());
 			userResponse = new UserResponseVO();
