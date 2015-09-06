@@ -1,6 +1,5 @@
 package vo;
 
-import pojos.User;
 
 public class PackageResponseVO {
 

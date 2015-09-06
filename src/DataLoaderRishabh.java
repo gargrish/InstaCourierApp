@@ -9,7 +9,16 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import com.stripe.Stripe;
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
+import com.stripe.model.Customer;
+
 import pojos.User;
+import utility.GlobalConstants;
 
 
 
@@ -71,7 +80,32 @@ public class DataLoaderRishabh {
 			System.out.println("Create Time : " + otp.getCreate_time());		
 		}
 		sessionFactory.close();*/
-	   
+/*		Stripe.apiKey = GlobalConstants.STRIPE_API_KEY;
+
+		Customer cu = null;
+		for(int i=1;i<=28;i++){
+
+		try {
+			cu = Customer.retrieve("stripeId"+i);
+			cu.delete();
+			
+		} catch (AuthenticationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (APIConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CardException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (APIException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}*/
 /*		Address add1=new Address();
 		//add1.setId("1");
 		add1.setLattitude(28.70);

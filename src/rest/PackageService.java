@@ -24,16 +24,16 @@ public class PackageService {
 
 
 	@POST
-	@Path("raisepackagerequest")
+	@Path("createpackagerequest")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public PackageResponseVO userAuthentication(Package pack) {
 		PackageResponseVO packageResponse = null;
 		try {
 			packageResponse = dao.insertPackage(pack);
-		} catch (Exception e) {
-			
-			e.printStackTrace();
+		} catch (Exception e) {			
+			packageResponse.setResponse(false);
+			packageResponse.setErrorMsg("Error while inserting in Package Service - "+e.getMessage());
 		}
 		return packageResponse;
 	}

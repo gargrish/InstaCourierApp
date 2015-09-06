@@ -60,7 +60,7 @@ public class DaoImpl implements DaoI {
 			} finally {
 				session.close();
 			}
-		}else{
+		} else {
 			userResponseVO.setErrorMsg(checkUserResponse.getErrorMsg());
 			userResponseVO.setResponse(false);
 		}
@@ -121,8 +121,8 @@ public class DaoImpl implements DaoI {
 		}
 		return userResponseVO;
 	}
-	
-	public UserResponseVO checkUserExistence(long mobileNumber){
+
+	public UserResponseVO checkUserExistence(long mobileNumber) {
 		UserResponseVO userResponseVO = new UserResponseVO();
 		Session session = sessionFactory.openSession();
 		try {
@@ -130,15 +130,16 @@ public class DaoImpl implements DaoI {
 					Restrictions.eq("mobileNumber", mobileNumber));
 			if (criteria.list().size() > 0) {
 				userResponseVO.setResponse(true);
-				userResponseVO.setErrorMsg("User with mobile number [" + mobileNumber
-						+ "] already exists");
+				userResponseVO.setErrorMsg("User with mobile number ["
+						+ mobileNumber + "] already exists");
 			} else {
 				userResponseVO.setResponse(false);
 			}
 		} catch (Exception e) {
 			userResponseVO.setResponse(true);
-			userResponseVO.setErrorMsg("Error while fetching user for mobile number ["
-					+ mobileNumber + "]");
+			userResponseVO
+					.setErrorMsg("Error while fetching user for mobile number ["
+							+ mobileNumber + "]");
 		} finally {
 			session.close();
 		}
@@ -147,29 +148,28 @@ public class DaoImpl implements DaoI {
 
 	@Override
 	public PackageResponseVO insertPackage(Package pack) {
-		// TODO Auto-generated method stub
-		//Package packageEntry=new Package();
-		PackageResponseVO response=new PackageResponseVO();
+		// Package packageEntry=new Package();
+		PackageResponseVO packageResponse = new PackageResponseVO();
 		try {
-//			packageEntry.setCost(pack.getCost());
-//			packageEntry.setDeliveryDate(pack.getDeliveryDate());
-//			packageEntry.setDeliveryTime(pack.getDeliveryTime());
-//			packageEntry.setDestinationFullAdress(pack.g);
+			// packageEntry.setCost(pack.getCost());
+			// packageEntry.setDeliveryDate(pack.getDeliveryDate());
+			// packageEntry.setDeliveryTime(pack.getDeliveryTime());
+			// packageEntry.setDestinationFullAdress(pack.g);
 			pack.setCreated(this.getCurrentTime());
 			pack.setOpenOrder(true);
 			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
 			session.save(pack);
+			tx.commit();
 			session.close();
-			response.setResponse(true);
-			response.setErrorMsg("success");
+			packageResponse.setResponse(true);
+			packageResponse.setErrorMsg("success");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			response.setResponse(false);
-			response.setErrorMsg("Failure in raising request as "+e.getMessage());
-			return response;
+			packageResponse.setResponse(false);
+			packageResponse.setErrorMsg("Failure in raising request as "
+					+ e.getMessage());
 		}
-		return response;
-		
+		return packageResponse;
 	}
 }
