@@ -13,9 +13,11 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import pojos.User;
+import pojos.Package;
 import utility.GlobalConstants;
 import utility.InstaCourierUtil;
 import utility.StripeWebService;
+import vo.PackageResponseVO;
 import vo.UserResponseVO;
 
 import com.stripe.Stripe;
@@ -141,5 +143,33 @@ public class DaoImpl implements DaoI {
 			session.close();
 		}
 		return userResponseVO;
+	}
+
+	@Override
+	public PackageResponseVO insertPackage(Package pack) {
+		// TODO Auto-generated method stub
+		//Package packageEntry=new Package();
+		PackageResponseVO response=new PackageResponseVO();
+		try {
+//			packageEntry.setCost(pack.getCost());
+//			packageEntry.setDeliveryDate(pack.getDeliveryDate());
+//			packageEntry.setDeliveryTime(pack.getDeliveryTime());
+//			packageEntry.setDestinationFullAdress(pack.g);
+			pack.setCreated(this.getCurrentTime());
+			pack.setOpenOrder(true);
+			Session session = sessionFactory.openSession();
+			session.save(pack);
+			session.close();
+			response.setResponse(true);
+			response.setErrorMsg("success");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			response.setResponse(false);
+			response.setErrorMsg("Failure in raising request as "+e.getMessage());
+			return response;
+		}
+		return response;
+		
 	}
 }
