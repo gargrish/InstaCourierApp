@@ -12,8 +12,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import pojos.User;
 import pojos.Package;
+import pojos.User;
 import utility.GlobalConstants;
 import utility.InstaCourierUtil;
 import utility.StripeWebService;
@@ -39,19 +39,19 @@ public class DaoImpl implements DaoI {
 				user.setCreated(this.getCurrentTime());
 				session.save(user);
 				Stripe.apiKey = GlobalConstants.STRIPE_API_KEY;
-				UserResponseVO stripeResponse = StripeWebService
+/*				UserResponseVO stripeResponse = StripeWebService
 						.createCustomer(user);
-				if (stripeResponse.isResponse()) {
+				if (stripeResponse.isResponse()) {*/
 					tx.commit();
 					userResponseVO.setResponse(true);
 					userResponseVO.setUser(user);
-				} else {
+/*				} else {
 					tx.rollback();
 					userResponseVO.setResponse(false);
 					userResponseVO
 							.setErrorMsg("Error while creating user using Stripe API : "
 									+ stripeResponse.getErrorMsg());
-				}
+				}*/
 			} catch (Exception e) {
 				logger.info(e.getStackTrace().toString());
 				tx.rollback();
@@ -154,9 +154,9 @@ public class DaoImpl implements DaoI {
 			// packageEntry.setCost(pack.getCost());
 			// packageEntry.setDeliveryDate(pack.getDeliveryDate());
 			// packageEntry.setDeliveryTime(pack.getDeliveryTime());
-			// packageEntry.setDestinationFullAdress(pack.g);
-			pack.setCreated(this.getCurrentTime());
-			pack.setOpenOrder(true);
+			// packageEntry.setDestinationFullAdress(pack.g);			
+			//pack.setCreated(this.getCurrentTime());
+			//pack.setIsOpenOrder(true);
 			Session session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
 			session.save(pack);
@@ -164,7 +164,7 @@ public class DaoImpl implements DaoI {
 			session.close();
 			packageResponse.setResponse(true);
 			packageResponse.setErrorMsg("success");
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			packageResponse.setResponse(false);
 			packageResponse.setErrorMsg("Failure in raising request as "

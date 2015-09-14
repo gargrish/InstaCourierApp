@@ -2,20 +2,16 @@ package rest;
 
 import java.util.logging.Logger;
 
-import javax.transaction.SystemException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import pojos.User;
-import utility.InstaCourierUtil;
-import utility.TwilioWebService;
-import vo.PackageResponseVO;
-import vo.UserResponseVO;
-import dao.DaoI;
 import pojos.Package;
+import utility.InstaCourierUtil;
+import vo.PackageResponseVO;
+import dao.DaoI;
 
 @Path("/package")
 public class PackageService {
@@ -27,8 +23,8 @@ public class PackageService {
 	@Path("createpackagerequest")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public PackageResponseVO userAuthentication(Package pack) {
-		PackageResponseVO packageResponse = null;
+	public PackageResponseVO createPackageRequest(Package pack) {
+		PackageResponseVO packageResponse = new PackageResponseVO();
 		try {
 			packageResponse = dao.insertPackage(pack);
 		} catch (Exception e) {			

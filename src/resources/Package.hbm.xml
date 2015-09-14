@@ -3,64 +3,67 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 1 Sep, 2015 11:21:08 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="pojos.Package" table="PACKAGE">
-        <id name="id" type="int">
-            <column name="ID" />
-            <generator class="increment" />
-        </id>
-        <many-to-one name="user" class="pojos.User" fetch="join">
-            <column name="USER" />
-        </many-to-one>
-        <property name="sourceFullAdress" type="java.lang.String">
-            <column name="SOURCEFULLADRESS" />
-        </property>
-        <property name="sourceLattitude" type="double">
-            <column name="SOURCELATTITUDE" />
-        </property>
-        <property name="sourceLongitude" type="double">
-            <column name="SOURCELONGITUDE" />
-        </property>
-        <property name="destinationFullAdress" type="java.lang.String">
-            <column name="DESTINATIONFULLADRESS" />
-        </property>
-        <property name="destinationLattitude" type="double">
-            <column name="DESTINATIONLATTITUDE" />
-        </property>
-        <property name="destinationLongitude" type="double">
-            <column name="DESTINATIONLONGITUDE" />
-        </property>
-        <property name="weight" type="int">
-            <column name="WEIGHT" />
-        </property>
-        <property name="dimensions" type="java.lang.String">
-            <column name="DIMENSIONS" />
-        </property>
-        <property name="isFragile" type="boolean" access="field">
-            <column name="ISFRAGILE" />
-        </property>
-        <property name="specialInstruction" type="java.lang.String">
-            <column name="SPECIALINSTRUCTION" />
-        </property>
-        <property name="deliveryDate" type="java.util.Date">
-            <column name="DELIVERYDATE" />
-        </property>
-        <property name="deliveryTime" type="java.sql.Time">
-            <column name="DELIVERYTIME" />
-        </property>
-        <property name="isOpenOrder" type="boolean" access="field">
-            <column name="ISOPENORDER" />
-        </property>
-        <property name="cost" type="double">
-            <column name="COST" />
-        </property>
-        <property name="created" type="java.util.Date">
-            <column name="CREATED" />
-        </property>
-        <property name="recieverNumver" type="int">
-            <column name="RECIEVERNUMVER" />
-        </property>
-        <property name="securityCode" type="int">
-            <column name="SECURITYCODE" />
-        </property>
-    </class>
+	<class name="pojos.Package" table="PACKAGE">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="increment" />
+		</id>
+		<many-to-one name="user" class="pojos.User" fetch="join">
+			<column name="USER" />
+		</many-to-one>
+		<property name="sourceFullAddress" type="java.lang.String">
+			<column name="SOURCEFULLADDRESS" />
+		</property>
+		<property name="sourceLatitude" type="double">
+			<column name="SOURCELATITUDE" />
+		</property>
+		<property name="sourceLongitude" type="double">
+			<column name="SOURCELONGITUDE" />
+		</property>
+		<property name="destinationFullAddress" type="java.lang.String">
+			<column name="DESTINATIONFULLADDRESS" />
+		</property>
+		<property name="destinationLatitude" type="double">
+			<column name="DESTINATIONLATITUDE" />
+		</property>
+		<property name="destinationLongitude" type="double">
+			<column name="DESTINATIONLONGITUDE" />
+		</property>
+		<property name="weight" type="double">
+			<column name="WEIGHT" />
+		</property>
+		<property name="length" type="double">
+			<column name="LENGTH" />
+		</property>
+		<property name="breadth" type="double">
+			<column name="BREADTH" />
+		</property>
+		<property name="height" type="double">
+			<column name="HEIGHT" />
+		</property>
+		<property name="isFragile" type="boolean" access="field">
+			<column name="ISFRAGILE" />
+		</property>
+		<property name="specialInstruction" type="java.lang.String">
+			<column name="SPECIALINSTRUCTION" />
+		</property>
+		<property name="deliveryDate" type="java.lang.String">
+			<column name="DELIVERYDATE" />
+		</property>
+		<property name="isOpenOrder" type="boolean" access="field">
+			<column name="ISOPENORDER" />
+		</property>
+		<property name="cost" type="double">
+			<column name="COST" />
+		</property>
+		<property name="created" type="java.util.Date">
+			<column name="CREATED" />
+		</property>
+		<property name="receiverMobileNumber" type="long">
+			<column name="RECEIVERMOBILENUMBER" />
+		</property>
+		<property name="securityCode" type="int">
+			<column name="SECURITYCODE" />
+		</property>
+	</class>
 </hibernate-mapping>

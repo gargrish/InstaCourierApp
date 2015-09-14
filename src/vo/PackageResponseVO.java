@@ -1,7 +1,9 @@
 package vo;
 
+import java.io.Serializable;
 
-public class PackageResponseVO {
+
+public class PackageResponseVO implements Serializable {
 
 	private boolean response;
 	private String errorMsg;
