@@ -10,6 +10,8 @@ import javax.ws.rs.core.MediaType;
 
 import pojos.Package;
 import utility.InstaCourierUtil;
+import utility.USPSWebService;
+import vo.PackagePriceRequestVO;
 import vo.PackageResponseVO;
 import dao.DaoI;
 
@@ -17,7 +19,6 @@ import dao.DaoI;
 public class PackageService {
 	DaoI dao = InstaCourierUtil.getDaoInstance();
 	Logger logger = Logger.getLogger("debug");
-
 
 	@POST
 	@Path("createpackagerequest")
@@ -27,11 +28,32 @@ public class PackageService {
 		PackageResponseVO packageResponse = new PackageResponseVO();
 		try {
 			packageResponse = dao.insertPackage(pack);
-		} catch (Exception e) {			
+		} catch (Exception e) {
 			packageResponse.setResponse(false);
-			packageResponse.setErrorMsg("Error while inserting in Package Service - "+e.getMessage());
+			packageResponse
+					.setErrorMsg("Error while inserting in Package Service - "
+							+ e.getMessage());
 		}
 		return packageResponse;
+	}
+
+	@POST
+	@Path("getpackageprice")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getPackagePrice(PackagePriceRequestVO packagePriceRequestVO) {
+		String packagePrice = "";
+		if (packagePriceRequestVO!=null && packagePriceRequestVO.getPack() != null && !packagePriceRequestVO.getSourceZipCode().isEmpty()
+				&& !packagePriceRequestVO.getDestinationZipCode().isEmpty()) {
+			try {
+				packagePrice = USPSWebService.fetchPriceOfPackage(packagePriceRequestVO.getPack(),
+						packagePriceRequestVO.getSourceZipCode(), packagePriceRequestVO.getDestinationZipCode());
+			} catch (Exception e) {
+				packagePrice = "Exception while getching price of package : "
+						+ e.getMessage();
+			}
+		}
+		return packagePrice;
 	}
 
 }
